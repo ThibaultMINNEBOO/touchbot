@@ -1,0 +1,30 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url = env("DATABASE_URL")
+}
+
+model GuildUser {
+  userId String
+  guildId String
+
+  exp Float? @default(0)
+  level Int? @default(0)
+  biography String?
+
+  warns Warn[]
+
+  @@id([userId, guildId])
+}
+
+model Warn {
+  createdAt DateTime @id @default(now())
+  user GuildUser @relation(fields: [userId, guildId], references: [userId, guildId])
+  reason String?
+
+  userId String
+  guildId String
+}
