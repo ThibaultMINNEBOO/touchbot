@@ -1,0 +1,24 @@
+{
+  "name": "touchbot",
+  "version": "0.1.0",
+  "description": "multipurpose bot ",
+  "main": "dist/index.js",
+  "repository": "https://github.com/ThibaultMINNEBOO/touchbot",
+  "author": "Thibault MINNEBOO",
+  "license": "MIT",
+  "dependencies": {
+    "discord.js": "^14.14.1"
+  },
+  "devDependencies": {
+    "@types/node": "^20.9.4",
+    "@typescript-eslint/eslint-plugin": "^6.4.0",
+    "eslint": "^8.0.1",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-config-standard-with-typescript": "^40.0.0",
+    "eslint-plugin-import": "^2.25.2",
+    "eslint-plugin-n": "^15.0.0 || ^16.0.0 ",
+    "eslint-plugin-prettier": "^5.0.1",
+    "eslint-plugin-promise": "^6.0.0",
+    "typescript": "*"
+  }
+}
