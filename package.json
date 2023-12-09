@@ -13,7 +13,8 @@
     "discord.js": "^14.14.1"
   },
   "scripts": {
-    "dev": "npx ts-node -r dotenv/config src/index.ts"
+    "dev": "npx ts-node -r dotenv/config src/index.ts",
+    "build": "npx tsc --build"
   },
   "devDependencies": {
     "@types/node": "^20.9.4",
