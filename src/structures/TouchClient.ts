@@ -1,4 +1,4 @@
-import { Client, IntentsBitField, Partials } from "discord.js";
+import { Client, IntentsBitField, Partials, REST, Routes } from "discord.js";
 import { Logger } from "../utils/Logger";
 import type { ClientSettings } from "../types/Types";
 import type { Command } from "./Command";
@@ -29,15 +29,32 @@ export class TouchClient extends Client {
   /**
    * Start the bot
    */
-  public async run(): Promise<void> {
+  public run(): void {
     this.login(this._token)
       .then(() => {
         Logger.log(`${this.user?.username} is successfuly connected!`);
+        this.registerCommands();
       })
       .catch((err) => {
         Logger.error(
           `An error has occured! Here's the details on the error : ${err}`,
         );
+      });
+  }
+
+  private registerCommands(): void {
+    const rest = new REST({ version: "10" }).setToken(
+      process.env.TOKEN as string,
+    );
+    const cmds = this.getCommands().map((cmd) => cmd.metadata);
+
+    rest
+      .put(Routes.applicationCommands(this.user?.id as string), { body: cmds })
+      .then(() => {
+        Logger.log("Slash commands (/) are now enabled.");
+      })
+      .catch((err) => {
+        Logger.error(err);
       });
   }
 
