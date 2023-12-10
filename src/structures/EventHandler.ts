@@ -15,8 +15,8 @@ export class EventHandler {
     readdirSync(this._client.settings.eventPath)
       .filter((files) => files.endsWith(".js") || files.endsWith(".ts"))
       .map(async (file: string) => {
-        const event: Event = new // eslint-disable-next-line new-cap
-        (await import(join(this._client.settings.eventPath, file))).default();
+        // eslint-disable-next-line prettier/prettier, new-cap
+        const event: Event = new (await import(join(this._client.settings.eventPath, file))).default();
 
         if (event.once) {
           this._client.once(event.name, event.run.bind(null, this._client));

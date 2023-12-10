@@ -2,6 +2,7 @@ import { Client, IntentsBitField, Partials, REST, Routes } from "discord.js";
 import { Logger } from "../utils/Logger";
 import type { ClientSettings } from "../types/Types";
 import type { Command } from "./Command";
+import { EventHandler } from "./EventHandler";
 
 export class TouchClient extends Client {
   private readonly _token: string;
@@ -34,6 +35,8 @@ export class TouchClient extends Client {
       .then(() => {
         Logger.log(`${this.user?.username} is successfuly connected!`);
         this.registerCommands();
+        const eventHandler = new EventHandler(this);
+        eventHandler.loadListeners();
       })
       .catch((err) => {
         Logger.error(
